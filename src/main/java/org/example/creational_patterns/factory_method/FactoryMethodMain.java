@@ -2,12 +2,16 @@ package org.example.creational_patterns.factory_method;
 
 public class FactoryMethodMain {
     public static void startExecution(String notify){
-        Notification notification = null;
+        try {
+            NotificationFactory notificationFactory = null;
 
-         if(notify.equals("email")) notification = new EmailNotification();
-         else if(notify.equals("sms")) notification = new SMSNotification();
+            if(notify.equals("email")) notificationFactory = new EmailNotificationFactory();
+            else if(notify.equals("sms")) notificationFactory = new SMSNotificationFactory();
 
-        assert notification != null;
-        notification.notifyUser();
+            assert notificationFactory != null;
+            notificationFactory.sendNotification();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
